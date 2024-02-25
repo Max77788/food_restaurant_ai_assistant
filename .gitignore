@@ -1,5 +1,5 @@
 .upm
-__pycache__/gi
+__pycache__/
 .cache
 .pythonlibs
 .upm
