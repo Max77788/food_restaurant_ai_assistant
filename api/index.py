@@ -22,7 +22,7 @@ else:
 # Start Flask app
 app = Flask(__name__)
 
-OPENAI_API_KEY = process.env.OPENAI_API_KEY
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 # Init client
 client = OpenAI(
