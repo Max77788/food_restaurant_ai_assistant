@@ -2,8 +2,8 @@ import os
 from time import sleep
 #from packaging import version (omit version check for now)
 from flask import Flask, request, jsonify
-import openai
-from openai import OpenAI
+#import openai
+#from openai import OpenAI
 import functions
 import json
 
@@ -29,6 +29,7 @@ client = OpenAI(
 # Create new assistant or load existing
 assistant_id = functions.create_assistant(client)
 
+"""
 # Start conversation thread
 @app.route('/start', methods=['GET'])
 def start_conversation():
@@ -102,6 +103,7 @@ def chat():
   response = messages.data[0].content[0].text.value
   print(f"Assistant response: {response}")  # Debugging line
   return jsonify({"response": response})
+"""
 
 # Test function 1
 @app.route('/hellotest', methods=['GET'])
