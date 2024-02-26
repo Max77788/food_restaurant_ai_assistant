@@ -101,10 +101,15 @@ def chat():
   print(f"Assistant response: {response}")  # Debugging line
   return jsonify({"response": response})
 
-# Test function
+# Test function 1
 @app.route('/hellotest', methods=['GET'])
 def print_hello():
     return 'Hello Worrrrld!'
+
+# Test function 2
+@app.route('/')
+def print_main_pahe():
+    return 'You are on the main page!'
 
 
 # Run server
