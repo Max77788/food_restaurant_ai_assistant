@@ -1,13 +1,14 @@
 import os
 from time import sleep
-from packaging import version
+#from packaging import version (omit version check for now)
 from flask import Flask, request, jsonify
 import openai
 from openai import OpenAI
 import functions
 import json
 
-# Check OpenAI version is correct
+# Check OpenAI version is correct(omit version check for now)
+"""
 required_version = version.parse("1.1.1")
 current_version = version.parse(openai.__version__)
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
@@ -16,6 +17,7 @@ if current_version < required_version:
                    " is less than the required version 1.1.1")
 else:
   print("OpenAI version is compatible.")
+"""
 
 # Start Flask app
 app = Flask(__name__)
