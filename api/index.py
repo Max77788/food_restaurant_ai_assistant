@@ -2,8 +2,8 @@ import os
 from time import sleep
 #from packaging import version (omit version check for now)
 from flask import Flask, request, jsonify
-#import openai
-#from openai import OpenAI
+import openai
+from openai import OpenAI
 import functions
 import json
 
@@ -21,7 +21,7 @@ else:
 
 # Start Flask app
 app = Flask(__name__)
-"""
+
 # Init client
 client = OpenAI(
     api_key=OPENAI_API_KEY)  # should use env variable OPENAI_API_KEY in secrets (bottom left corner)
@@ -103,8 +103,8 @@ def chat():
   response = messages.data[0].content[0].text.value
   print(f"Assistant response: {response}")  # Debugging line
   return jsonify({"response": response})
-"""
 
+"""
 # Test function 1
 @app.route('/hellotest', methods=['GET'])
 def print_hello():
@@ -114,7 +114,7 @@ def print_hello():
 @app.route('/')
 def print_main_pahe():
     return 'You are on the main page!'
-
+"""
 
 # Run server
 if __name__ == '__main__':
