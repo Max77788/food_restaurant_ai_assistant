@@ -22,12 +22,15 @@ else:
 # Start Flask app
 app = Flask(__name__)
 
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
 # Init client
 client = OpenAI(
-    api_key=OPENAI_API_KEY)  # should use env variable OPENAI_API_KEY in secrets (bottom left corner)
+    api_key=OPENAI_API_KEY)  # should use env variable OPENAI_API_KEY
 
 # Create new assistant or load existing
 assistant_id = functions.create_assistant(client)
+
 
 # Start conversation thread
 @app.route('/start', methods=['GET'])
@@ -103,6 +106,7 @@ def chat():
   print(f"Assistant response: {response}")  # Debugging line
   return jsonify({"response": response})
 
+"""
 # Test function 1
 @app.route('/hellotest', methods=['GET'])
 def print_hello():
@@ -112,7 +116,7 @@ def print_hello():
 @app.route('/')
 def print_main_pahe():
     return 'You are on the main page!'
-
+"""
 
 # Run server
 if __name__ == '__main__':
