@@ -22,11 +22,11 @@ else:
 # Start Flask app
 app = Flask(__name__)
 
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
 # Init client
 client = OpenAI(
-    api_key=OPENAI_API_KEY)  # should use env variable OPENAI_API_KEY in secrets (bottom left corner)
+    api_key=OPENAI_API_KEY)  # should use env variable OPENAI_API_KEY
 
 # Create new assistant or load existing
 assistant_id = functions.create_assistant(client)
