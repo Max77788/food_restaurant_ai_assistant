@@ -32,6 +32,6 @@ We welcome contributions from the community! If you have ideas on how to improve
 WingsTasteFinder is open-source and available under the MIT License. See the LICENSE file for more details.
 
 ### Contact
-For any inquiries or suggestions, please contact us at support@wingstastefinder.com.
+For any inquiries or suggestions, please contact us at contact@mom-ai-agency.online.
 
 _Dive into the world of wings with WingsTasteFinder and discover your next favorite flavor today!_ 🚀🎉
