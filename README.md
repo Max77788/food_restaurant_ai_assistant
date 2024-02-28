@@ -34,4 +34,4 @@ WingsTasteFinder is open-source and available under the MIT License. See the LIC
 ### Contact
 For any inquiries or suggestions, please contact us at support@wingstastefinder.com.
 
-_Dive into the world of wings with WingsTasteFinder and discover your next favorite flavor today!_🚀🎉
+_Dive into the world of wings with WingsTasteFinder and discover your next favorite flavor today!_ 🚀🎉
