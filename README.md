@@ -1,5 +1,5 @@
-# WingsTasteFinder
-#### Welcome to WingsTasteFinder - your ultimate guide to discovering and ordering the best wings! Whether you're a spicy aficionado, a BBQ lover, or a fan of the classic buffalo, WingsTasteFinder is here to cater to all your wing cravings. Our AI-powered assistant is designed to recommend the perfect wings for your palate, ensuring a delicious and satisfying experience every time.😋🍗
+# MOM AI Food Ordering Assistant
+#### Welcome to MOM AI Food Ordering Assistant - your ultimate guide to discovering and ordering the best wings! Whether you're a spicy aficionado, a BBQ lover, or a fan of the classic buffalo, MOM AI Food Ordering Assistant is here to cater to all your wing cravings. Our AI-powered assistant is designed to recommend the perfect wings for your palate, ensuring a delicious and satisfying experience every time.😋🍗
 
 Features
 - Personalized Recommendations: Utilizing advanced AI algorithms, our assistant learns your preferences and suggests wings that match your taste profile.🧠
@@ -8,7 +8,7 @@ Features
 - User Reviews and Ratings: See what other wing enthusiasts have to say about their experiences and share your own reviews to help others find their perfect wings.💬
 
 ## Getting Started
-To get started with WingsTasteFinder, follow these simple steps:
+To get started with MOM AI Food Ordering Assistant, follow these simple steps:
 
 1. Clone the Repository: Begin by cloning this repository to your local machine.
 bash
@@ -17,7 +17,7 @@ bash
 3. Install Dependencies: Navigate to the project directory and install the necessary dependencies.
 bash
 4. Copy code
-`cd WingsTasteFinder`
+`cd MOM AI Food Ordering Assistant`
 pip install -r requirements.txt
 5. Run the Application: Start the application and begin exploring the world of wings.
 Copy code
@@ -26,12 +26,12 @@ python api/index.py
 Interact with the AI-powered assistant through our user-friendly interface. Simply answer a few questions about your taste preferences, and let our system do the rest. Once you receive your recommendations, you can review the details and place your order directly through the platform.
 
 ### Contributing
-We welcome contributions from the community! If you have ideas on how to improve WingsTasteFinder or want to add new features, please feel free to fork the repository and submit a pull request.
+We welcome contributions from the community! If you have ideas on how to improve MOM AI Food Ordering Assistant or want to add new features, please feel free to fork the repository and submit a pull request.
 
 ### License
-WingsTasteFinder is open-source and available under the MIT License. See the LICENSE file for more details.
+MOM AI Food Ordering Assistant is open-source and available under the MIT License. See the LICENSE file for more details.
 
 ### Contact
 For any inquiries or suggestions, please contact us at contact@mom-ai-agency.online.
 
-_Dive into the world of wings with WingsTasteFinder and discover your next favorite flavor today!_ 🚀🎉
+_Dive into the world of wings with MOM AI Food Ordering Assistant and discover your next favorite flavor today!_ 🚀🎉
