@@ -1,5 +1,4 @@
 Flask
 openai>=0.10.2
 requests
-json
 dotenv
