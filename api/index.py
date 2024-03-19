@@ -6,6 +6,9 @@ import openai
 from openai import OpenAI
 import functions
 import json
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 
 # Check OpenAI version is correct(omit version check for now)
 """

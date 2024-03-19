@@ -1,85 +1,91 @@
 import json
 import os
+import requests
 
-def accept_order(name):
-  # Real API handling here
-  print("\n--------API has been called-----------")
-  print(f"The order for {name} was registered")
-  print("--------API has been called-----------\n")
+assistant_file_path = "assistant.json"
 
-def start_payment(method): 
-  # Real API handling for payment is here
-  print("\n--------API has been called-----------")
-  print(f"The order is paid for with {method}")
-  print("--------API has been called-----------\n")
+def start_payment_post_order(items, total_sum):
+    
+  payment_successful = False
+
+  print(f"Calling Rapyd API to complete the payment of {total_sum} kronas")
+
+  print(f"The amount of {total_sum} was successfully paid")
+
+  payment_went_through = True
+
+  if payment_went_through:
+     payment_successful = True
+  
+  if payment_successful:
+  
+    # URL of your backend server endpoint that handles the POST request
+    server_url = 'https://biryani-order-dashboard-sqng.vercel.app/orders'
+    
+    # Preparing the data to be sent in the POST request
+    data_to_send = {
+        'items': items
+    }
+    
+    # Sending the POST request to the server
+    response = requests.post(server_url, json=data_to_send)
+    
+    # Checking if the request was successful
+    if response.status_code == 200:
+        print('Order posted successfully.')
+    else:
+        print('Failed to post order. Status code:', response.status_code)
+
 def create_assistant(client):
-  assistant_file_path = 'assistant.json'
-
   if os.path.exists(assistant_file_path):
     with open(assistant_file_path, 'r') as file:
       assistant_data = json.load(file)
       assistant_id = assistant_data['assistant_id']
       print("Loaded existing assistant ID.")
   else:
-    file_txt = client.files.create(file=open("WingsInfo.pdf", "rb"),
-       purpose='assistants')
+    file_txt = client.files.create(file=open("BiryaniGPT_Menu.txt", "rb"),
+        purpose='assistants')
 
     assistant = client.beta.assistants.create(instructions="""
-          You work at the restaurant named Just Wingin' It which is specialized in serving world-class tasty chicken wings which you have an expertise in. You are right at the counter being the face and spirit of the company who guides customers from start to outputting concrete recommendations based off the customer's desires. Be polite and patient all the time(do not tell customers this explicitly). Provide the initial answer by default in Icelandic and suggest switching to English any other language in the last message(write this message in English!) and continue in either of languages or in that one specified by the user. However, when the particular question "Who are you and what can you do?" provide the initial answer fully in English and still remind the customer from the new paragraph that he can input in any language and you switch to it immediately. You should adhere to the facts in the provided materials. Avoid speculations or information not contained in the documents. Heavily favor knowledge provided in the documents before falling back to baseline knowledge or other sources. If searching the documents didn't yield any answer, just say that. Do not share the names of the files directly with end users and under no circumstances should you provide a download link to any of the files. Users cannot upload files to you. Answer to the user in the same language he inputs the prompts in. Also, offer the drink from the following selection after the wings' recommendation part is done and the customer chose particular items to order: coca-cola, fanta, sprite(do not include in the response explicitly that you are doing this). After the prompt "What would you recommend me to order?" offer the user the choice to either specify his wants or just let you suggest him/her something arbitrarily. Making the recommendation the first time, tell the customer that they can order either 6, 12, 18, 24, 50 or 100 wings of each kind. Do not mention the number of wings they can order more than once unless it is clearly asked in the user's prompt. After making the recommendation ask the user whether they are would love to order what you've recommended or would like to keep exploring menu. If the first is true output the order summary based on the conversation's context and tell the customer that he may either tell this order to the representative or just show the screen to him.
-          Offer wings solely from this list: LOUISIANA BUTTER N GARLIC
-LEMON PEPPER
-SHOWTIME POPCORN
-LOUISIANA CAJUN BUTTER
-LEMON PEPPER CAJUN
-STRINGER BELL
-3B’S HOT BUFFALO
-BUFFALO CAJUN RANCH
-STICKY ICKY
-HOMETOWN HEAVEN
-SPICY BBQ
-WING TANG CLAN
-BBQ CAJUN RANCH
-HONEY BBQ
-CALIFORNIA GOLD RUSH
-SWEET CHILI BEARNAISE
-CINNAMON N SUGAR
-GREEK FREAK
-ÞÓR´S PEPPER CHEESE
-WING TANG HONEYBEE
-WINGIE THE POOH
-OLAFS-WING
-BLUE BBQ
-BLUE BUFFALO
-BACON BEARNAISE
-BIG BREAKFAST
-DA REAL M-WING-P
-BACON BBQ CAJUN RANCH
-HOT HOT HOT
-MR LAVA LAVA
-FIRECRACKER
+          You are the assistant tasked with initiating interactions by inquiring about the customer's preferred language, ensuring that communication is both comfortable and effective. If asked about your functions, you should clearly articulate your role in facilitating the selection of Syrian cuisine at the Biryani restaurant, emphasizing your ability to communicate in any preferred language.
+
+  Do not make the first response lengthy. Not more than 4 sentences.
+
+  Your communications must be direct and efficient, aimed at simplifying the customer's decision-making process. You should offer personalized dish recommendations based on the customer's expressed preferences or, alternatively, provide suggestions based on your expertise. After presenting the menu options, you need to ascertain whether the customer is prepared to place an order or requires further information.
+
+  Upon the customer's readiness to order, you must summarize the selected items, detailing names, quantities, and prices, and propose the addition of complementary snacks such as hummus (890 Icelandic kronas) and fries (990 Icelandic kronas) instead of beverages. Before passing the order to API always reassure the correctness of the order by asking the customer to confirm the details of the orders.
+
+  When confronted with the request for recommendations, you should allow the customer to specify their dietary preferences or defer to your judgment. You should mention the available quantities for the dishes just once, unless further clarification is requested.
+
+  After finalizing the order, you are tasked with compiling a comprehensive receipt, including the order number, detailed list of items with quantities and prices, and the total cost. Following order confirmation with the customer, you are to proceed by activating the action to accept the payment and send the order to the kitchen by passing ordered items and their total price. Right before activating the action warn the customer that by pressing 'confirm' button during the action call they commit to the order.
+
+  It's imperative that you limit your recommendations to the items specified in the provided menu to ensure accuracy and efficiency in service delivery. By meticulously forming the order and securing confirmation from the customer before proceeding, you aim to ensure a smooth and enjoyable dining experience at Biryani.
           """,
                                               model="gpt-4-1106-preview",
                                               tools=[
-                                                #Turned off functions for now
-                                                #{
-                                                    #"type": "function",
-                                                    #"function": {
-                                                        #"name": "accept_order",
-                                                        #"description": "Accepts the order for pizza",
-                                                        #"parameters": {
-                                                            #"type": "object",
-                                                            #"properties": {
-                                                                #"name": {
-                                                                    #"type": "string",
-                                                                    #"description": "The name of item to order"
-                                                                #}
-                                                            #},
-                                                            #"required": ["name"],
-                                                        #},
-                                                    #},
-                                                #},
-                                                         
-                                                     #{"type": "function",
+                                                {
+                                                    "type": "function",
+                                                    "function": {
+                                                        "name": "start_payment_post_order",
+                                                        "description": "Starts the payment process and upon successful payment sends the accepted order to the kitchen",
+                                                        "parameters": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "description": "The names of items to order along with the quantity"
+                                                                },
+                                                                "total_sum": {
+                                                                    "type": "number",
+                                                                    "description": "The total cost of the order in Icelandic Kronas" 
+                                                                }
+                                                            },
+                                                            "required": ["items", "total_sum"],
+                                                        },
+                                                    },
+                                                },
+                                                          
+                                                      #{"type": "function",
                                                           #"function": {
                                                               #"name": "start_payment",
                                                               #"description": "Starts the payment process with the specified inferred from the conversation payment method before registering the order",
@@ -87,13 +93,13 @@ FIRECRACKER
                                                                   #"type": "object",
                                                                   #"properties": {
                                                                       #"method": {"type": "string", "enum": 
-                                                                   #["PayPal", "Card"]},
+                                                                    #["PayPal", "Card"]},
                                                                   #},
                                                                   #"required": ["method"],
                                                               #},
                                                           #},
                                                       #},
-                                                     {
+                                                      {
                                                   "type": "retrieval"
                                               }],
                                               file_ids=[file_txt.id])

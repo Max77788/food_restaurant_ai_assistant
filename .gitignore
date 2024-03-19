@@ -4,3 +4,5 @@ __pycache__/
 .pythonlibs
 .upm
 .replit
+.env
+api/__pycache__
