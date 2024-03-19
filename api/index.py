@@ -4,7 +4,7 @@ from time import sleep
 from flask import Flask, request, jsonify
 import openai
 from openai import OpenAI
-import functions
+import api.functions as functions
 import json
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
