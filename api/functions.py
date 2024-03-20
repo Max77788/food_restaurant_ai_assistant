@@ -82,6 +82,11 @@ def create_assistant(client):
                                                         "parameters": {
                                                             "type": "object",
                                                             "properties": {
+                                                                "items":{
+                                                                   "type": "string",
+                                                                    "description": "The name of the item."
+                                                                },
+                                                                """
                                                                 "items": {
                                                                     "type": "array",
                                                                     #"description": "A list of dictionaries, each containing the name of the item to order and the quantity.",
@@ -101,6 +106,7 @@ def create_assistant(client):
                                                                         #"required": ["name", "quantity"]
                                                                     #}
                                                                 },
+                                                                """
                                                                 "total_sum": {
                                                                     "type": "integer",
                                                                     "description": "The total cost of the order in Icelandic Kronas" 
