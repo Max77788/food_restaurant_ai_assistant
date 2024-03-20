@@ -74,21 +74,21 @@ def create_assistant(client):
                                                         "name": "start_payment_post_order",
                                                         "description": "Starts the payment process and upon successful payment sends the accepted order to the kitchen",
                                                         "parameters": {
-                                                            #"type": "object",
-                                                            #"properties": {
+                                                            "type": "object",
+                                                            "properties": {
                                                                 "items": {
-                                                                   # "type": "object",
+                                                                   "type": "list",
                                                                     "description": "The list of dictionaries of names of items to order along with the quantity"
                                                                 },
                                                                 "total_sum": {
-                                                                    #"type": "number",
+                                                                    "type": "integer",
                                                                     "description": "The total cost of the order in Icelandic Kronas" 
                                                                 }
                                                             },
                                                             "required": ["items", "total_sum"],
                                                         },
                                                     },
-                                                #},
+                                                },
                                                           
                                                       #{"type": "function",
                                                           #"function": {
