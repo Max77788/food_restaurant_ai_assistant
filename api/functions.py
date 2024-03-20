@@ -79,8 +79,22 @@ def create_assistant(client):
                                                             "type": "object",
                                                             "properties": {
                                                                 "items": {
-                                                                   "type": "object",
-                                                                    "description": "The list of dictionaries of names of items to order along with the quantity"
+                                                                    "type": "array",
+                                                                    "description": "A list of dictionaries, each containing the name of the item to order and the quantity.",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "name": {
+                                                                                "type": "string",
+                                                                                "description": "The name of the item."
+                                                                            },
+                                                                            "quantity": {
+                                                                                "type": "integer",
+                                                                                "description": "The quantity of the item."
+                                                                            }
+                                                                        },
+                                                                        "required": ["name", "quantity"]
+                                                                    }
                                                                 },
                                                                 "total_sum": {
                                                                     "type": "integer",
