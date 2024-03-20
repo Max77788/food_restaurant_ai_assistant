@@ -36,6 +36,9 @@ def start_payment_post_order(items, total_sum):
     else:
         print('Failed to post order. Status code:', response.status_code)
 
+  else:
+     print("Payment is unsuccessful, revertin back...")
+
 def create_assistant(client):
   if os.path.exists(assistant_file_path):
     with open(assistant_file_path, 'r') as file:
@@ -69,21 +72,21 @@ def create_assistant(client):
                                                         "name": "start_payment_post_order",
                                                         "description": "Starts the payment process and upon successful payment sends the accepted order to the kitchen",
                                                         "parameters": {
-                                                            "type": "object",
-                                                            "properties": {
+                                                            #"type": "object",
+                                                            #"properties": {
                                                                 "items": {
-                                                                    "type": "object",
-                                                                    "description": "The names of items to order along with the quantity"
+                                                                   # "type": "object",
+                                                                    "description": "The list of dictionaries of names of items to order along with the quantity"
                                                                 },
                                                                 "total_sum": {
-                                                                    "type": "number",
+                                                                    #"type": "number",
                                                                     "description": "The total cost of the order in Icelandic Kronas" 
                                                                 }
                                                             },
                                                             "required": ["items", "total_sum"],
                                                         },
                                                     },
-                                                },
+                                                #},
                                                           
                                                       #{"type": "function",
                                                           #"function": {
