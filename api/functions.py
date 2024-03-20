@@ -77,7 +77,7 @@ def create_assistant(client):
                                                             "type": "object",
                                                             "properties": {
                                                                 "items": {
-                                                                   "type": "list",
+                                                                   "type": "object",
                                                                     "description": "The list of dictionaries of names of items to order along with the quantity"
                                                                 },
                                                                 "total_sum": {
