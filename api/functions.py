@@ -40,7 +40,7 @@ def start_payment_post_order(items, total_sum):
      print("Payment is unsuccessful, revertin back...")
 
 def create_assistant(client):
-  if os.path.exists(assistant_file_path):
+  if os.environ.get("MAKE_NEW_ASSISTANT") != "YES":
     with open(assistant_file_path, 'r') as file:
       assistant_data = json.load(file)
       assistant_id = assistant_data['assistant_id']
