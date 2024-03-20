@@ -48,6 +48,8 @@ def create_assistant(client):
       assistant_id = assistant_data['assistant_id']
       print("Loaded existing assistant ID.")
   else:
+    if os.path.exists(assistant_file_path):
+       os.remove(assistant_file_path)
     file_txt = client.files.create(file=open("BiryaniGPT_Menu.txt", "rb"),
         purpose='assistants')
 
