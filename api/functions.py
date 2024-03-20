@@ -82,7 +82,7 @@ def create_assistant(client):
                                                         "parameters": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "items":{
+                                                                "foods":{
                                                                    "type": "string",
                                                                     "description": "The name of the item."
                                                                 },
