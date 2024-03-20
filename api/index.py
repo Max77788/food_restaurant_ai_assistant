@@ -81,6 +81,9 @@ def chat():
         if tool_call.function.name == "start_payment_post_order":
           # Pizza order accepted
           arguments = json.loads(tool_call.function.arguments)
+          
+          print("\n\n\n\nRetrieved arguments:\n", arguments, "\n\n\n\n") #debugging line
+
           output = functions.start_payment_post_order(arguments["items"], arguments["total_sum"])
           client.beta.threads.runs.submit_tool_outputs(thread_id=thread_id,
                                                        run_id=run.id,
