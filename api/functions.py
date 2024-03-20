@@ -84,21 +84,22 @@ def create_assistant(client):
                                                             "properties": {
                                                                 "items": {
                                                                     "type": "array",
-                                                                    "description": "A list of dictionaries, each containing the name of the item to order and the quantity.",
-                                                                    "items": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "name": {
-                                                                                "type": "string",
-                                                                                "description": "The name of the item."
-                                                                            },
-                                                                            "quantity": {
-                                                                                "type": "integer",
-                                                                                "description": "The quantity of the item."
-                                                                            }
-                                                                        },
-                                                                        "required": ["name", "quantity"]
-                                                                    }
+                                                                    #"description": "A list of dictionaries, each containing the name of the item to order and the quantity.",
+                                                                    "description": "A list of food items to order",
+                                                                    #"items": {
+                                                                        #"type": "object",
+                                                                        #"properties": {
+                                                                            #"name": {
+                                                                                #"type": "string",
+                                                                                #"description": "The name of the item."
+                                                                            #},
+                                                                            #"quantity": {
+                                                                                #"type": "integer",
+                                                                                #"description": "The quantity of the item."
+                                                                            #}
+                                                                        #},
+                                                                        #"required": ["name", "quantity"]
+                                                                    #}
                                                                 },
                                                                 "total_sum": {
                                                                     "type": "integer",
