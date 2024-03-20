@@ -42,7 +42,7 @@ def start_payment_post_order(items, total_sum):
      print("Payment is unsuccessful, revertin back...")
 
 def create_assistant(client):
-  if os.environ.get("MAKE_NEW_ASSISTANT") != "YES":
+  if os.environ.get("MAKE_NEW_ASSISTANT") != "YES" and os.path.exists(assistant_file_path):
     with open(assistant_file_path, 'r') as file:
       assistant_data = json.load(file)
       assistant_id = assistant_data['assistant_id']
@@ -66,7 +66,11 @@ def create_assistant(client):
 
   After finalizing the order, you are tasked with compiling a comprehensive receipt, including the order number, detailed list of items with quantities and prices, and the total cost. Following order confirmation with the customer, you are to proceed by activating the action to accept the payment and send the order to the kitchen by passing ordered items and their total price. Right before activating the action warn the customer that by pressing 'confirm' button during the action call they commit to the order.
 
-  It's imperative that you limit your recommendations to the items specified in the provided menu to ensure accuracy and efficiency in service delivery. By meticulously forming the order and securing confirmation from the customer before proceeding, you aim to ensure a smooth and enjoyable dining experience at Biryani.
+  It's imperative that you limit your recommendations to the items specified in the provided menu to ensure accuracy and efficiency in service delivery. 
+                                              
+   When a customer mentions dishes they are interested in, ask for specific quantities for each dish to ensure the order is accurate. For instance, if a customer says they want chicken biryani, confirm by asking, "How many servings of chicken biryani would you like?" Use their responses to compile a structured list of items, including the dish name and quantity, and confirm the entire order before proceeding with payment.
+                                              
+   By meticulously forming the order and securing confirmation from the customer before proceeding, you aim to ensure a smooth and enjoyable dining experience at Biryani.
           """,
                                               model="gpt-4-1106-preview",
                                               tools=[

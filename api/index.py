@@ -4,7 +4,8 @@ from time import sleep
 from flask import Flask, request, jsonify
 import openai
 from openai import OpenAI
-import api.functions as functions
+#import api.functions as functions
+import functions
 import json
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -38,6 +39,8 @@ assistant_id = functions.create_assistant(client)
 # Start conversation thread
 @app.route('/start', methods=['GET'])
 def start_conversation():
+  # Create new assistant or load existing
+  print("Returned id ", assistant_id) # Debugging line
   print("Starting a new conversation...")  # Debugging line
   thread = client.beta.threads.create()
   print(f"New thread created with ID: {thread.id}")  # Debugging line
