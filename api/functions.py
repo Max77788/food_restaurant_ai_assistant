@@ -39,7 +39,7 @@ def start_payment_post_order(items, total_sum):
         print('Failed to post order. Status code:', response.status_code)
 
   else:
-     print("Payment is unsuccessful, revertin back...")
+     print("Payment is unsuccessful, reverting back...")
 
 def create_assistant(client):
   if os.environ.get("MAKE_NEW_ASSISTANT") != "YES" and os.path.exists(assistant_file_path):
