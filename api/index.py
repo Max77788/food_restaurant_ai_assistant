@@ -1,7 +1,7 @@
 import os
 from time import sleep
 #from packaging import version (omit version check for now)
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, return_template
 import openai
 from openai import OpenAI
 import api.functions as functions
@@ -45,6 +45,15 @@ def start_conversation():
   thread = client.beta.threads.create()
   print(f"New thread created with ID: {thread.id}")  # Debugging line
   return jsonify({"thread_id": thread.id})
+
+@app.route('/successful_payment', methods=['GET'])
+def successful_payment():
+  return return_template('successful_payment.html', templates="../templates")
+
+@app.route('/error_payment', methods=['GET'])
+def error_payment():
+  return return_template('error_payment.html', templates="../templates")
+
 
 # Generate response
 @app.route('/chat', methods=['POST'])

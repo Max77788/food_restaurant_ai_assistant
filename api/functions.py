@@ -1,7 +1,9 @@
 import json
 import os
 import requests
+from rapyd_payment import create_checkout_page
 from dotenv import find_dotenv, load_dotenv
+from flask import redirect
 load_dotenv(find_dotenv())
 
 assistant_file_path = "assistant.json"
@@ -11,6 +13,10 @@ def start_payment_post_order(items, total_sum):
   payment_successful = False
 
   print(f"Calling Rapyd API to complete the payment of {total_sum} kronas")
+
+  checkout_page_link = create_checkout_page()
+
+  redirect(checkout_page_link)
 
   print(f"The amount of {total_sum} was successfully paid")
 
