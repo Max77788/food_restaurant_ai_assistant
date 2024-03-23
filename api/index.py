@@ -90,13 +90,13 @@ def chat():
       print("Action in progress...")
       # Handle the function call
       for tool_call in run_status.required_action.submit_tool_outputs.tool_calls:
-        if tool_call.function.name == "start_payment_post_order":
+        if tool_call.function.name == "start_payment":
           # Pizza order accepted
           arguments = json.loads(tool_call.function.arguments)
           
           print("\n\n\n\nRetrieved arguments:\n", arguments, "\n\n\n\n") #debugging line
 
-          output = functions.start_payment_post_order(arguments["items"], arguments["total_sum"])
+          output = functions.start_payment(arguments["total_sum"])
           client.beta.threads.runs.submit_tool_outputs(thread_id=thread_id,
                                                        run_id=run.id,
                                                        tool_outputs=[{
@@ -105,7 +105,22 @@ def chat():
                                                            "output":
                                                            json.dumps(output)
                                                        }])
-      
+        
+        if tool_call.function.name == "post_order":
+          # Pizza order accepted
+          arguments = json.loads(tool_call.function.arguments)
+          
+          print("\n\n\n\nRetrieved arguments:\n", arguments, "\n\n\n\n") #debugging line
+
+          output = functions.post_order(arguments["items"])
+          client.beta.threads.runs.submit_tool_outputs(thread_id=thread_id,
+                                                       run_id=run.id,
+                                                       tool_outputs=[{
+                                                           "tool_call_id":
+                                                           tool_call.id,
+                                                           "output":
+                                                           json.dumps(output)
+                                                       }])
           
         """ if tool_call.function.name == "start_payment":
           # Payment Started
