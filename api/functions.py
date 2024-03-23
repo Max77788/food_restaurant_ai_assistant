@@ -1,7 +1,7 @@
 import json
 import os
 import requests
-from rapyd_payment import create_checkout_page
+from api.rapyd_payment import create_checkout_page
 from dotenv import find_dotenv, load_dotenv
 from flask import redirect
 load_dotenv(find_dotenv())
