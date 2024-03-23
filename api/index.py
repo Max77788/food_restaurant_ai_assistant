@@ -1,11 +1,11 @@
 import os
 from time import sleep
 #from packaging import version (omit version check for now)
-from flask import Flask, request, jsonify, return_template
+from flask import Flask, request, jsonify, render_template
 import openai
 from openai import OpenAI
-import api.functions as functions
-#import functions
+#import api.functions as functions
+import functions
 import json
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -48,11 +48,11 @@ def start_conversation():
 
 @app.route('/successful_payment', methods=['GET'])
 def successful_payment():
-  return return_template('successful_payment.html', templates="../templates")
+  return render_template('successful_payment.html')
 
 @app.route('/error_payment', methods=['GET'])
 def error_payment():
-  return return_template('error_payment.html', templates="../templates")
+  return render_template('error_payment.html')
 
 
 # Generate response
@@ -139,4 +139,4 @@ def print_main_pahe():
 
 # Run server
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=8080)
+  app.run(debug=True)
