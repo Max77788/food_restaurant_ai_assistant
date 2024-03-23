@@ -105,6 +105,10 @@ def chat():
                                                            "output":
                                                            json.dumps(output)
                                                        }])
+          response = "Output Redirection Link"
+          print(f"Assistant response: {response}")  # Debugging line
+          
+          return jsonify({"response": response})
           
         """ if tool_call.function.name == "start_payment":
           # Payment Started
