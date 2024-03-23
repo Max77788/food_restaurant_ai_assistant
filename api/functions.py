@@ -14,8 +14,11 @@ def start_payment_post_order(items, total_sum):
 
   print(f"Calling Rapyd API to complete the payment of {total_sum} kronas")
 
-  checkout_page_link = create_checkout_page(total_sum, )
+  checkout_page_link = create_checkout_page(total_sum, "333-777")
 
+  return checkout_page_link
+  
+  """
   # redirect(checkout_page_link)
 
   print(f"The amount of {total_sum} was successfully paid")
@@ -46,6 +49,7 @@ def start_payment_post_order(items, total_sum):
 
   else:
      print("Payment is unsuccessful, reverting back...")
+  """
 
 def create_assistant(client):
   if os.environ.get("MAKE_NEW_ASSISTANT") != "YES" and os.path.exists(assistant_file_path):

@@ -105,10 +105,7 @@ def chat():
                                                            "output":
                                                            json.dumps(output)
                                                        }])
-          response = "Output Redirection Link"
-          print(f"Assistant response: {response}")  # Debugging line
-          
-          return jsonify({"response": response})
+      
           
         """ if tool_call.function.name == "start_payment":
           # Payment Started
@@ -126,6 +123,9 @@ def chat():
   # Retrieve and return the latest message from the assistant
   messages = client.beta.threads.messages.list(thread_id=thread_id)
   response = messages.data[0].content[0].text.value
+  if output:
+    response = output       
+
   print(f"Assistant response: {response}")  # Debugging line
   return jsonify({"response": response})
 
