@@ -69,6 +69,8 @@ def payment_check():
       print("Payment succeeded event sent the request on orders")
     else:
       print("Payment succeeded event failed to send the request on orders")
+    
+    return render_template('successful_payment.html')
   
   if data["type"] == "PAYMENT_FAILED":
     # The URL you're sending the POST request to
@@ -87,6 +89,8 @@ def payment_check():
       print("Payment failed event sent the request on orders")
     else:
       print("Payment failed event failed (haha, double failure) to send the request on orders") 
+    
+    return render_template('error_payment.html')
 
   # Get the referrer
   referrer = request.referrer
