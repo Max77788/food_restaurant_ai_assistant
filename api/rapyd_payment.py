@@ -1,7 +1,7 @@
 from pprint import pprint
 from flask import redirect
 import time
-from utilities import make_request
+from api.utilities import make_request
 
 
 # Create a payment
