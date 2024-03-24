@@ -47,8 +47,8 @@ def start_conversation():
   print(f"New thread created with ID: {thread.id}")  # Debugging line
   return jsonify({"thread_id": thread.id})
 
-@app.route('/successful_payment', methods=['GET', 'POST'])
-def successful_payment():
+@app.route('/payment_check', methods=['GET', 'POST'])
+def payment_check():
   data = request.json
   print("POST order on successful payment endpoint: ", data)
 
@@ -70,23 +70,6 @@ def successful_payment():
     else:
       print("Payment succeeded event failed to send the request on orders")
   
-
-
-  # Get the referrer
-  referrer = request.referrer
-
-  # Check if the referrer matches the pattern
-  if referrer:
-      return render_template('successful_payment.html')
-  else:
-    return abort(403)  
-
-
-@app.route('/error_payment', methods=['GET', 'POST'])
-def error_payment():
-  
-  data = request.json
-  
   if data["type"] == "PAYMENT_FAILED":
     # The URL you're sending the POST request to
     url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
@@ -103,7 +86,22 @@ def error_payment():
     if response.status_code == 200:
       print("Payment failed event sent the request on orders")
     else:
-      print("Payment failed event failed (haha, double failure) to send the request on orders")
+      print("Payment failed event failed (haha, double failure) to send the request on orders") 
+
+  # Get the referrer
+  referrer = request.referrer
+
+  # Check if the referrer matches the pattern
+  if referrer:
+      return render_template('successful_payment.html')
+  else:
+    return abort(403)  
+
+
+@app.route('/error_payment', methods=['GET', 'POST'])
+def error_payment():
+  
+  data = request.json
   
   # Get the referrer
   referrer = request.referrer
