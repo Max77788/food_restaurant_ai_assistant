@@ -47,10 +47,11 @@ def start_conversation():
   print(f"New thread created with ID: {thread.id}")  # Debugging line
   return jsonify({"thread_id": thread.id})
 
-@app.route('/successful_payment', methods=['GET'])
+@app.route('/successful_payment', methods=['GET', 'POST'])
 def successful_payment():
   data = request.json
-  
+  print("POST order on successful payment endpoint: ", data)
+
   if data["type"] == "PAYMENT_SUCCEEDED":
     # The URL you're sending the POST request to
     url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
@@ -81,7 +82,7 @@ def successful_payment():
     return abort(403)  
 
 
-@app.route('/error_payment', methods=['GET'])
+@app.route('/error_payment', methods=['GET', 'POST'])
 def error_payment():
   
   data = request.json
