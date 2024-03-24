@@ -52,7 +52,7 @@ def successful_payment():
   data = request.json
   print("POST order on successful payment endpoint: ", data)
 
-  if data["type"] == "PAYMENT_SUCCEEDED":
+  if data["type"] == "PAYMENT_COMPLETED":
     # The URL you're sending the POST request to
     url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
 
