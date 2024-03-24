@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, render_template, abort
 import openai
 from openai import OpenAI
 import api.functions as functions
-import re
 #import functions
 import json
 from dotenv import load_dotenv, find_dotenv
@@ -49,15 +48,12 @@ def start_conversation():
 
 @app.route('/successful_payment', methods=['GET'])
 def successful_payment():
-    # Regex pattern to match allowed domain including any subdomains
-    pattern = r"https?://.*checkout_.*"
-
     # Get the referrer
     referrer = request.referrer
 
     # Check if the referrer matches the pattern
-    if referrer and re.match(pattern, referrer):
-        #checkout_id = referrer[-]
+    if referrer:
+        
         return render_template('successful_payment.html')
     else:
         return abort(403)
