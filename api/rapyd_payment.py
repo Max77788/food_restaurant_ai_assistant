@@ -1,7 +1,7 @@
 from pprint import pprint
 from flask import redirect
 import time
-from api.utilities import make_request
+from utilities import make_request
 
 
 # Create a payment
@@ -35,14 +35,16 @@ def create_payment(total_sum):
 """
 
 # Create a checkout page
-def create_checkout_page(amount, items, expiration_ts=time.time() + 604800):
+def create_checkout_page(items, expiration_ts=time.time() + 604800):
     
+    amount = sum(item['amount'] * item['quantity'] for item in items)
+
     checkout_page = {
     "amount": amount,
     "complete_payment_url": "https://biryani-ai-pal.vercel.app/successful_payment",
+    "cart_items": items,
     "country": "IS",
     "currency": "ISK",
-    "cart_items": items,
     #"customer": customer_token,
     "error_payment_url": "https://biryani-ai-pal.vercel.app/error_payment",
     "merchant_reference_id": "biryani",
@@ -62,7 +64,7 @@ def create_checkout_page(amount, items, expiration_ts=time.time() + 604800):
 
     return checkout_page_url
 
-data1 = make_request(method='get', path='/v1/checkout/checkout_b2e48ba25425c24d7a502d5237f9a7ea')
+data1 = create_checkout_page()
 
 pprint(data1)
 

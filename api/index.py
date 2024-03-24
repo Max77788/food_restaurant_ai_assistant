@@ -109,7 +109,7 @@ def chat():
 
           print("\n\n\n\nRetrieved arguments:\n", arguments, "\n\n\n\n") #debugging line
 
-          output = functions.start_payment(arguments["total_sum"],arguments["items"])
+          output = functions.start_payment(arguments["items"])
           client.beta.threads.runs.submit_tool_outputs(thread_id=thread_id,
                                                        run_id=run.id,
                                                        tool_outputs=[{
