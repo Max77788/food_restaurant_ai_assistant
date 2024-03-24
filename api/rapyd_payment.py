@@ -64,10 +64,6 @@ def create_checkout_page(items, expiration_ts=time.time() + 604800):
 
     return checkout_page_url
 
-data1 = create_checkout_page()
-
-pprint(data1)
-
      
 
 
