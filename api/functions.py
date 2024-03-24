@@ -8,13 +8,11 @@ load_dotenv(find_dotenv())
 
 assistant_file_path = "assistant.json"
 
-def start_payment(total_sum):
-    
-  payment_successful = False
+def start_payment(total_sum, items):
 
   print(f"Calling Rapyd API to complete the payment of {total_sum} kronas")
 
-  checkout_page_link = create_checkout_page(total_sum, "333-777")
+  checkout_page_link = create_checkout_page(total_sum, items["items"])
 
   return checkout_page_link
   

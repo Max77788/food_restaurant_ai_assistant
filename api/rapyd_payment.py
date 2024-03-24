@@ -35,16 +35,17 @@ def create_payment(total_sum):
 """
 
 # Create a checkout page
-def create_checkout_page(amount, merchant_reference_id, expiration_ts=time.time() + 604800):
+def create_checkout_page(amount, items, expiration_ts=time.time() + 604800):
     
     checkout_page = {
     "amount": amount,
     "complete_payment_url": "https://biryani-ai-pal.vercel.app/successful_payment",
     "country": "IS",
     "currency": "ISK",
+    "cart_items": items,
     #"customer": customer_token,
     "error_payment_url": "https://biryani-ai-pal.vercel.app/error_payment",
-    "merchant_reference_id": merchant_reference_id,
+    "merchant_reference_id": "biryani",
     "language": "en",
     "metadata": {
         "merchant_defined": True
@@ -61,11 +62,9 @@ def create_checkout_page(amount, merchant_reference_id, expiration_ts=time.time(
 
     return checkout_page_url
 
+data1 = make_request(method='get', path='/v1/checkout/checkout_b2e48ba25425c24d7a502d5237f9a7ea')
 
-
-checkout_page_url = create_checkout_page(7777, "3333-7777")
-
-print(checkout_page_url)
+pprint(data1)
 
      
 

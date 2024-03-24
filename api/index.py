@@ -1,11 +1,12 @@
 import os
 from time import sleep
 #from packaging import version (omit version check for now)
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, abort
 import openai
 from openai import OpenAI
 import api.functions as functions
-# import functions
+import re
+#import functions
 import json
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -48,7 +49,19 @@ def start_conversation():
 
 @app.route('/successful_payment', methods=['GET'])
 def successful_payment():
-  return render_template('successful_payment.html')
+    # Regex pattern to match allowed domain including any subdomains
+    pattern = r"https?://.*checkout_.*"
+
+    # Get the referrer
+    referrer = request.referrer
+
+    # Check if the referrer matches the pattern
+    if referrer and re.match(pattern, referrer):
+        #checkout_id = referrer[-]
+        return render_template('successful_payment.html')
+    else:
+        return abort(403)
+
 
 @app.route('/error_payment', methods=['GET'])
 def error_payment():
@@ -91,12 +104,11 @@ def chat():
       # Handle the function call
       for tool_call in run_status.required_action.submit_tool_outputs.tool_calls:
         if tool_call.function.name == "start_payment":
+          print("\n\n\n\nRetrieved arguments:\n", arguments, "\n\n\n\n") #debugging line
           # Pizza order accepted
           arguments = json.loads(tool_call.function.arguments)
-          
-          print("\n\n\n\nRetrieved arguments:\n", arguments, "\n\n\n\n") #debugging line
 
-          output = functions.start_payment(arguments["total_sum"])
+          output = functions.start_payment(arguments["total_sum"],arguments["items"])
           client.beta.threads.runs.submit_tool_outputs(thread_id=thread_id,
                                                        run_id=run.id,
                                                        tool_outputs=[{
@@ -105,7 +117,7 @@ def chat():
                                                            "output":
                                                            json.dumps(output)
                                                        }])
-        
+        """
         if tool_call.function.name == "post_order":
           # Pizza order accepted
           arguments = json.loads(tool_call.function.arguments)
@@ -122,7 +134,7 @@ def chat():
                                                            json.dumps(output)
                                                        }])
           
-        """ if tool_call.function.name == "start_payment":
+          if tool_call.function.name == "start_payment":
           # Payment Started
           arguments = json.loads(tool_call.function.arguments)
           output = functions.start_payment(arguments["method"])
