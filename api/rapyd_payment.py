@@ -41,12 +41,12 @@ def create_checkout_page(items, expiration_ts=time.time() + 604800):
 
     checkout_page = {
     "amount": amount,
-    "complete_payment_url": "https://biryani-ai-pal.vercel.app/successful_payment",
+    "complete_payment_url": "https://biryani-ai-pal.vercel.app/payment_check",
     "cart_items": items,
     "country": "IS",
     "currency": "ISK",
     #"customer": customer_token,
-    "error_payment_url": "https://biryani-ai-pal.vercel.app/error_payment",
+    "error_payment_url": "https://biryani-ai-pal.vercel.app/payment_check",
     "merchant_reference_id": "biryani",
     "language": "en",
     "metadata": {
