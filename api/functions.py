@@ -9,7 +9,23 @@ load_dotenv(find_dotenv())
 assistant_file_path = "assistant.json"
 
 def start_payment(items):
+   
+  # The URL you're sending the POST request to
+  url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
 
+  # The header to indicate JSON data is being sent
+  headers = {"Content-Type": "application/json"}
+
+  # The data you're sending, formatted as JSON
+  data = {"items": items}
+
+  # Sending the POST request
+  response = requests.post(url, json=data, headers=headers)
+
+  if response.status_code == 200:
+     print("Posting the order on start_payment invocation SUCCESSFUL")
+  else:
+     raise Exception("Error posting the order on start_payment invocation")
   checkout_page_link = create_checkout_page(items)
 
   return checkout_page_link

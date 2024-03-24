@@ -7,6 +7,7 @@ from openai import OpenAI
 import api.functions as functions
 #import functions
 import json
+import requests
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -48,21 +49,69 @@ def start_conversation():
 
 @app.route('/successful_payment', methods=['GET'])
 def successful_payment():
-    # Get the referrer
-    referrer = request.referrer
+  data = request.json
+  
+  if data["type"] == "PAYMENT_SUCCEEDED":
+    # The URL you're sending the POST request to
+    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
 
-    # Check if the referrer matches the pattern
-    if referrer:
-        
-        return render_template('successful_payment.html')
+    # The header to indicate JSON data is being sent
+    headers = {"Content-Type": "application/json"}
+
+    # The data you're sending, formatted as JSON
+    data = {"action": "PUBLISH_THE_ORDER"}
+
+    # Sending the POST request
+    response = requests.post(url, json=data, headers=headers)
+
+    if response.status_code == 200:
+      print("Payment succeeded event sent the request on orders")
     else:
-        return abort(403)
+      print("Payment succeeded event failed to send the request on orders")
+  
+
+
+  # Get the referrer
+  referrer = request.referrer
+
+  # Check if the referrer matches the pattern
+  if referrer:
+      return render_template('successful_payment.html')
+  else:
+    return abort(403)  
 
 
 @app.route('/error_payment', methods=['GET'])
 def error_payment():
-  return render_template('error_payment.html')
+  
+  data = request.json
+  
+  if data["type"] == "PAYMENT_FAILED":
+    # The URL you're sending the POST request to
+    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
 
+    # The header to indicate JSON data is being sent
+    headers = {"Content-Type": "application/json"}
+
+    # The data you're sending, formatted as JSON
+    data = {"action": "DELETE_THE_ORDER"}
+
+    # Sending the POST request
+    response = requests.post(url, json=data, headers=headers)
+
+    if response.status_code == 200:
+      print("Payment failed event sent the request on orders")
+    else:
+      print("Payment failed event failed (haha, double failure) to send the request on orders")
+  
+  # Get the referrer
+  referrer = request.referrer
+
+    # Check if the referrer matches the pattern
+  if referrer:
+    return render_template('error_payment.html')
+  else:
+    return abort(403)
 
 # Generate response
 @app.route('/chat', methods=['POST'])
