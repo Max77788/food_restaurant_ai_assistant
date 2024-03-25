@@ -54,7 +54,7 @@ def payment_check():
   # Get the referrer
   referrer = request.referrer
 
-  if referrer:
+  if referrer and request.method == 'POST':
     if data["type"] == "PAYMENT_COMPLETED":
       # The URL you're sending the POST request to
       url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
@@ -94,6 +94,9 @@ def payment_check():
         print("Payment failed event failed (haha, double failure) to send the request on orders") 
       
       return render_template('error_payment.html')
+  
+  elif referrer and request.method == 'GET':
+    return "Please, start payment process to access the workflow containing this page."
   else:
     return "There direct access to this page is prohibited!" 
 
