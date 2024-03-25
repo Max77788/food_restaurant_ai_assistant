@@ -53,19 +53,13 @@ def payment_check():
     if request.method == 'POST' and request.is_json:
         data = request.json
         print("\n\nWebhook on payment_check endpoint: \n\n", data)
-        # Get the referrer
-        referrer = request.referrer
-         
-        print(f"Debugging line:\n\n referrer is \n\n{referrer}")
+        if data["type"] == "PAYMENT_COMPLETED":
+            # Specify your logic for payment completed
+            return handle_payment_completed()
 
-        if referrer:
-            if data["type"] == "PAYMENT_COMPLETED":
-                # Specify your logic for payment completed
-                return handle_payment_completed()
-
-            elif data["type"] == "PAYMENT_FAILED":
-                # Specify your logic for payment failed
-                return handle_payment_failed()
+        elif data["type"] == "PAYMENT_FAILED":
+            # Specify your logic for payment failed
+            return handle_payment_failed()
 
     elif request.method == 'GET':
         # Logic for GET request
