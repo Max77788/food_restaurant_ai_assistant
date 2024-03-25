@@ -50,56 +50,52 @@ def start_conversation():
 @app.route('/payment_check', methods=['GET', 'POST'])
 def payment_check():
   data = request.json
-  print("POST order on successful payment endpoint: ", data)
-
-  if data["type"] == "PAYMENT_COMPLETED":
-    # The URL you're sending the POST request to
-    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
-
-    # The header to indicate JSON data is being sent
-    headers = {"Content-Type": "application/json"}
-
-    # The data you're sending, formatted as JSON
-    data = {"action": "PUBLISH_THE_ORDER"}
-
-    # Sending the POST request
-    response = requests.post(url, json=data, headers=headers)
-
-    if response.status_code == 200:
-      print("Payment succeeded event sent the request on orders")
-    else:
-      print("Payment succeeded event failed to send the request on orders")
-    
-    return render_template('successful_payment.html')
-  
-  if data["type"] == "PAYMENT_FAILED":
-    # The URL you're sending the POST request to
-    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
-
-    # The header to indicate JSON data is being sent
-    headers = {"Content-Type": "application/json"}
-
-    # The data you're sending, formatted as JSON
-    data = {"action": "DELETE_THE_ORDER"}
-
-    # Sending the POST request
-    response = requests.post(url, json=data, headers=headers)
-
-    if response.status_code == 200:
-      print("Payment failed event sent the request on orders")
-    else:
-      print("Payment failed event failed (haha, double failure) to send the request on orders") 
-    
-    return render_template('error_payment.html')
-
+  print("\n\nWebhook on payment_check endpoint: \n\n", data)
   # Get the referrer
   referrer = request.referrer
 
-  # Check if the referrer matches the pattern
   if referrer:
+    if data["type"] == "PAYMENT_COMPLETED":
+      # The URL you're sending the POST request to
+      url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+
+      # The header to indicate JSON data is being sent
+      headers = {"Content-Type": "application/json"}
+
+      # The data you're sending, formatted as JSON
+      data = {"action": "PUBLISH_THE_ORDER"}
+
+      # Sending the POST request
+      response = requests.post(url, json=data, headers=headers)
+
+      if response.status_code == 200:
+        print("Payment succeeded event sent the request on orders")
+      else:
+        print("Payment succeeded event failed to send the request on orders")
+      
       return render_template('successful_payment.html')
+    
+    if data["type"] == "PAYMENT_FAILED":
+      # The URL you're sending the POST request to
+      url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+
+      # The header to indicate JSON data is being sent
+      headers = {"Content-Type": "application/json"}
+
+      # The data you're sending, formatted as JSON
+      data = {"action": "DELETE_THE_ORDER"}
+
+      # Sending the POST request
+      response = requests.post(url, json=data, headers=headers)
+
+      if response.status_code == 200:
+        print("Payment failed event sent the request on orders")
+      else:
+        print("Payment failed event failed (haha, double failure) to send the request on orders") 
+      
+      return render_template('error_payment.html')
   else:
-    return abort(403)  
+    return "There direct access to this page is prohibited!" 
 
 
 @app.route('/error_payment', methods=['GET', 'POST'])
