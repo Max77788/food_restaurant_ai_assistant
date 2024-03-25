@@ -94,17 +94,11 @@ def handle_payment_failed():
 
 @app.route('/error_payment', methods=['GET', 'POST'])
 def error_payment():
-  
-  data = request.json
-  
-  # Get the referrer
-  referrer = request.referrer
+    return render_template('successful_payment.html')
 
-    # Check if the referrer matches the pattern
-  if referrer:
+@app.route('/error_payment', methods=['GET', 'POST'])
+def error_payment():
     return render_template('error_payment.html')
-  else:
-    return abort(403)
 
 # Generate response
 @app.route('/chat', methods=['POST'])
