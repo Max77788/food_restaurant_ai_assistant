@@ -55,6 +55,8 @@ def payment_check():
         print("\n\nWebhook on payment_check endpoint: \n\n", data)
         # Get the referrer
         referrer = request.referrer
+         
+        print(f"Debugging line:\n\n referrer is \n\n{referrer}")
 
         if referrer:
             if data["type"] == "PAYMENT_COMPLETED":
