@@ -93,7 +93,7 @@ def handle_payment_failed():
 
 
 @app.route('/successful_payment', methods=['GET', 'POST'])
-def error_payment():
+def successful_payment_payment():
     return render_template('successful_payment.html')
 
 @app.route('/error_payment', methods=['GET', 'POST'])
