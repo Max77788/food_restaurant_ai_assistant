@@ -62,6 +62,7 @@ def payment_check():
             return handle_payment_failed()
 
     elif request.method == 'GET':
+        print("Output request of 'get' type on payment_check\n\n\n", request)
         # Logic for GET request
         return "Please, start payment process to access the workflow containing this page."
     
