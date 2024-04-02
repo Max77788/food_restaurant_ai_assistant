@@ -102,11 +102,19 @@ def handle_payment_failed():
 
 @app.route('/successful_payment', methods=['GET', 'POST'])
 def successful_payment_payment():
-    return render_template('successful_payment.html')
+    if os.environ.get("RESTAURANT_ASSISTANT") == "GamaBC":
+       html_link = "https://gamabc.com.ua/"
+    if os.environ.get("RESTAURANT_ASSISTANT") == "Biryani":
+       html_link = "https://www.biryanikeflavik.co/"
+    return render_template('successful_payment.html', html_link=html_link)
 
 @app.route('/error_payment', methods=['GET', 'POST'])
 def error_payment():
-    return render_template('error_payment.html')
+    if os.environ.get("RESTAURANT_ASSISTANT") == "GamaBC":
+       html_link = "https://gamabc.com.ua/"
+    if os.environ.get("RESTAURANT_ASSISTANT") == "Biryani":
+       html_link = "https://www.biryanikeflavik.co/"
+    return render_template('error_payment.html', html_link=html_link)
 
 # Generate response
 @app.route('/chat', methods=['POST'])
