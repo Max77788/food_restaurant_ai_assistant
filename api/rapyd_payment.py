@@ -77,9 +77,4 @@ def create_checkout_page(items, currency=currency, country=country, expiration_t
 
     return checkout_page_url
 
-print(create_checkout_page([
-        {"name": "Item1", "quantity": 2, "amount":200},
-        {"name": "Item2", "quantity": 5, "amount":300}
-    ]))
-
 
