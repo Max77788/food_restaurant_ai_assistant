@@ -9,9 +9,13 @@ load_dotenv(find_dotenv())
 assistant_file_path = "assistant.json"
 
 def start_payment(items):
-   
-  # The URL you're sending the POST request to
-  url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+
+  if os.environ.get("RESTAURANT_ASSISTANT") == "Biryani":  
+    # The URL you're sending the POST request to
+    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+  if os.environ.get("RESTAURANT_ASSISTANT") == "GamaBC":  
+    # The URL you're sending the POST request to
+    url = "https://gamabc-restaurantorderdashboard.onrender.com/orders"
 
   # The header to indicate JSON data is being sent
   headers = {"Content-Type": "application/json"}
@@ -29,7 +33,8 @@ def start_payment(items):
   checkout_page_link = create_checkout_page(items)
 
   return checkout_page_link
-  
+
+"""  
 def post_order(items):  
     # URL of your backend server endpoint that handles the POST request
     server_url = 'https://biryani-order-dashboard-sqng.vercel.app/orders'
@@ -49,7 +54,7 @@ def post_order(items):
     else:
         print('Failed to post order. Status code:', response.status_code)
         return jsonify({"response":"Was not able to post the order"})
-
+"""
 
 def create_assistant(client):
   if os.environ.get("MAKE_NEW_ASSISTANT") != "YES":
