@@ -36,6 +36,7 @@ client = OpenAI(
 # Create new assistant or load existing
 assistant_id = functions.create_assistant(client)
 
+restaurant_name = os.environ.get("RESTAURANT_ASSISTANT")
 
 # Start conversation thread
 @app.route('/start', methods=['GET'])
@@ -70,7 +71,11 @@ def payment_check():
     return "Direct access to this page is prohibited!"
 
 def handle_payment_completed():
-    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+    
+    if restaurant_name == "Biryani":
+        url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+    elif restaurant_name == "GamaBC":
+        url = "https://gamabc-restaurantorderdashboard.onrender.com/orders"
     headers = {"Content-Type": "application/json"}
     data = {"action": "PUBLISH_THE_ORDER"}
     response = requests.post(url, json=data, headers=headers)
@@ -81,7 +86,10 @@ def handle_payment_completed():
     return render_template('successful_payment.html')
 
 def handle_payment_failed():
-    url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+    if restaurant_name == "Biryani":
+        url = "https://biryani-order-dashboard-sqng.vercel.app/orders"
+    elif restaurant_name == "GamaBC":
+        url = "https://gamabc-restaurantorderdashboard.onrender.com/orders"
     headers = {"Content-Type": "application/json"}
     data = {"action": "DELETE_THE_ORDER"}
     response = requests.post(url, json=data, headers=headers)

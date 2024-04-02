@@ -52,11 +52,11 @@ def post_order(items):
 
 
 def create_assistant(client):
-  if os.environ.get("MAKE_NEW_ASSISTANT") != "YES" and os.path.exists(assistant_file_path):
-    with open(assistant_file_path, 'r') as file:
-      assistant_data = json.load(file)
-      assistant_id = assistant_data['assistant_id']
-      print("Loaded existing assistant ID.")
+  if os.environ.get("MAKE_NEW_ASSISTANT") != "YES":
+    if os.environ.get("RESTAURANT_ASSISTANT") == "Biryani":
+       assistant_id = "asst_WfGKKkunGMFTGIZSnidZNmHh"
+    if os.environ.get("RESTAURANT_ASSISTANT") == "GamaBC":
+       assistant_id = "asst_BAn7Xu51yezf4Q4FFYZ4yuRV"
   else:
     if os.path.exists(assistant_file_path):
        os.remove(assistant_file_path)

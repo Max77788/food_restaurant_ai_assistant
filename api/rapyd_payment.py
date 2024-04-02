@@ -2,6 +2,7 @@ from pprint import pprint
 from flask import redirect
 import time
 from api.utilities import make_request
+import os
 
 
 # Create a payment
@@ -34,8 +35,23 @@ def create_payment(total_sum):
     expiration_ts = response['data']['expiration']
 """
 
+currency = os.environ.get("CURRENCY")
+country = os.environ.get("COUNTRY")
+
+if country == "IS":
+    payment_method_types = [
+        "is_visa_card",
+        "is_mastercard_card"
+    ]
+
+elif country == "UA":
+    payment_method_types = [
+        "ua_visa_card",
+        "ua_mastercard_card"
+    ]
+
 # Create a checkout page
-def create_checkout_page(items, expiration_ts=time.time() + 604800):
+def create_checkout_page(items, currency=currency, country=country, expiration_ts=time.time() + 604800):
     
     amount = sum(item['amount'] * item['quantity'] for item in items)
 
@@ -43,8 +59,8 @@ def create_checkout_page(items, expiration_ts=time.time() + 604800):
     "amount": amount,
     "complete_payment_url": "https://biryani-ai-pal.vercel.app/successful_payment",
     "cart_items": items,
-    "country": "IS",
-    "currency": "ISK",
+    "country": country,
+    "currency": currency,
     #"customer": customer_token,
     "error_payment_url": "https://biryani-ai-pal.vercel.app/error_payment",
     "merchant_reference_id": "biryani",
@@ -53,10 +69,7 @@ def create_checkout_page(items, expiration_ts=time.time() + 604800):
         "merchant_defined": True
     },
     "expiration": expiration_ts,
-    "payment_method_types_include": [
-        "is_visa_card",
-        "is_mastercard_card"
-    ]
+    "payment_method_types_include": payment_method_types
 }
     result = make_request(method='post', path='/v1/checkout', body=checkout_page)
 
@@ -64,6 +77,9 @@ def create_checkout_page(items, expiration_ts=time.time() + 604800):
 
     return checkout_page_url
 
-     
+print(create_checkout_page([
+        {"name": "Item1", "quantity": 2, "amount":200},
+        {"name": "Item2", "quantity": 5, "amount":300}
+    ]))
 
 
