@@ -145,7 +145,17 @@ def chat():
                                                    run_id=run.id)
     print(f"Run status: {run_status.status}")
     if run_status.status == 'completed':
-      break
+        break
+    if run_status.status == 'failed':
+        print("Run failed.")
+        # Additional debugging information here
+        if hasattr(run_status, 'error'):
+            print(f"Error details: {run_status.error}")
+        else:
+            print("No error details available.")
+        i+=1
+        return 'O-oh, little issues, type the other message now'
+            
     sleep(1)  # Wait for a second before checking again
     if run_status.status == "requires_action":
       print("Action in progress...")
@@ -214,7 +224,3 @@ def print_hello():
 def print_main_pahe():
     return 'You are on the main page!'
 """
-
-# Run server
-if __name__ == '__main__':
-  app.run(debug=True)
