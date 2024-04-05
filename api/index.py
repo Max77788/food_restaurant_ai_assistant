@@ -153,7 +153,6 @@ def chat():
             print(f"Error details: {run_status.error}")
         else:
             print("No error details available.")
-        i+=1
         response = 'O-oh, little issues, type the other message now'
         return jsonify({"response": response})
             
