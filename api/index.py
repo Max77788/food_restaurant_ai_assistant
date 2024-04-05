@@ -154,7 +154,8 @@ def chat():
         else:
             print("No error details available.")
         i+=1
-        return 'O-oh, little issues, type the other message now'
+        response = 'O-oh, little issues, type the other message now'
+        return jsonify({"response": response})
             
     sleep(1)  # Wait for a second before checking again
     if run_status.status == "requires_action":
