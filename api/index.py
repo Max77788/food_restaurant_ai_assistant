@@ -148,11 +148,8 @@ def chat():
         break
     if run_status.status == 'failed':
         print("Run failed.")
-        # Additional debugging information here
-        if hasattr(run_status, 'error'):
-            print(f"Error details: {run_status.error}")
-        else:
-            print("No error details available.")
+        
+        print(f"Error details: {run.last_error}")
         response = 'O-oh, little issues, type the other message now'
         return jsonify({"response": response})
             
