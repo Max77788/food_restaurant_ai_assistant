@@ -153,7 +153,7 @@ def chat():
     if run_status.status == 'failed':
         print("Run failed.")
         
-        print(f"Error details: {run_steps['data']['last_error']}")
+        print(f"Error details: {run_steps['data'][0]['last_error']}")
         response = 'O-oh, little issues, type the other message now'
         return jsonify({"response": response})
             
