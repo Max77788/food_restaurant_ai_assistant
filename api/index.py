@@ -143,13 +143,17 @@ def chat():
   while True:
     run_status = client.beta.threads.runs.retrieve(thread_id=thread_id,
                                                    run_id=run.id)
+    run_steps = client.beta.threads.runs.steps.list(
+    thread_id=thread_id,
+    run_id=run.id)
+    
     print(f"Run status: {run_status.status}")
     if run_status.status == 'completed':
         break
     if run_status.status == 'failed':
         print("Run failed.")
         
-        print(f"Error details: {run.last_error}")
+        print(f"Error details: {run_steps['data']['last_error']}")
         response = 'O-oh, little issues, type the other message now'
         return jsonify({"response": response})
             
