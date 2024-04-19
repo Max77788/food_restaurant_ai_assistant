@@ -163,7 +163,8 @@ def chat():
               print("No errors reported for this run.")
         
         
-        print(run_steps)
+        print(f"\n\n Run steps: \n{run_steps}\n")
+        print(f"\n\n Run object: \n{run}\n")
         response = 'O-oh, little issues, type the other message now'
         return jsonify({"response": response})
             
