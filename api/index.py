@@ -151,7 +151,17 @@ def chat():
     if run_status.status == 'completed':
         break
     if run_status.status == 'failed':
+        
         print("Run failed.")
+        # Access the last_error attribute
+        last_error = run.last_error if "last_error" in run else None
+
+        # Print the last_error if it exists
+        if last_error:
+            print("Last Error:", last_error)
+        else:
+              print("No errors reported for this run.")
+        
         
         print(run_steps)
         response = 'O-oh, little issues, type the other message now'
